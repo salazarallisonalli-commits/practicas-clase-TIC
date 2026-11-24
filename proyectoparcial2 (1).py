@@ -4,7 +4,7 @@ discos=[
         "Nombre del disco": "Visions",
         "Precio del disco: $":500,
         "Artista": "Grimes",
-        "Stock":10
+        "Stock":0
     },
     {
         "Nombre del disco": "Masterpiece",
@@ -93,26 +93,35 @@ while op==0:
                 if opMod==1:
                     nuevoNom=input("Ingrese el nuevo nombre")
                     discos[i]["Nombre del disco"] = nuevoNom
+                    op=0
                 elif opMod==2:
                     nuevoPre=int(input("Ingrese el nuevo precio"))
-                    discos[i]["Precio del disco"] = nuevoPre
+                    discos[i]["Precio del disco: $"] = nuevoPre
+                    op=0
                 elif opMod==3:
                     nuevoArt=input("Ingrese el nuevo artista")
                     discos[i]["Artista"] = nuevoArt
+                    op=0
                 elif opMod==4:
                     nuevoSto=int(input("Ingrese la nueva cantidad en stock"))
+                    discos[i]["Stock"] = nuevoSto
+                    op=0
                 else:
                     print("Ingrese correctamente el número de la opción que desea modificar")
                 for disco in discos:
                             print(disco)
 # opcion 5
     elif op==5:
-        for disco in discos:
-            if disco["Stock"] == 0:
+        i=0
+        while i < len(discos):
+         for disco in discos:
+            if discos[i]["Stock"] == 0:
+                print("Este disco está en espera de restock:")
                 print(disco)
-                print("Este disco está en espera de restock")
-            else:
-                print("Todos los discos tienen una cantidad suficiente")
+                i=i+1
+                op=0
+
+                
     elif op==6:
         print("---CRITERIOS---")
         print("1.Artista")
@@ -124,14 +133,14 @@ while op==0:
                 if disco["Artista"] == art:
                     print(disco)
                 else:
-                    print("No se encuentra ningún disco de ese artista")
+                     op=0
         elif crit==2:
             precio=int(input("¿Que precio desea buscar?"))
             for disco in discos:
                 if disco["Precio del disco"] == precio:
                     print(disco)
                 else:
-                    print("No se encuentran discos con ese precio")
+                     op=0
         else:
             print("No existe ese crtiterio")
     elif op==7:
